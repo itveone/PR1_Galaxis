@@ -1,0 +1,86 @@
+// Praktikumabgabe
+// Per Anhalter durch die Galaxis - Die Frage aller Fragen
+// Author: Ahmadi, Mariam (S1, REE)
+// Datum: 07.10.2022
+// Version: 1 (Erstabgabe)
+
+
+#include <stdio.h> //Library beinhaltet die Funktion "system"
+#include <stdlib.h> //Standardbibliothek
+
+int ask_question(void); //Auflistung von Funktionen/Methods
+
+
+int main(void) // Hauptprogramm
+{
+
+    int ch;     ///Deklaration der Variable -> Für unser "Try again" Input
+                //Für die do-while Schleife
+
+// Main execution of prompting user and repeat
+// Do-while so that the conditional is checked
+// AFTER first asking the question
+
+
+    do
+    {
+        system("cls"); //Befehl, um das Fenster zu säubern
+        printf("Hello, User !"); //Willkommensgruß
+        printf("\n");
+
+        //Zeigt dem User die Hauptfrage
+        int  answer = ask_question();
+
+        if (answer == 42)
+        {
+            return 0;
+        }
+
+        else
+        {
+            printf("Unfortunately, your answer is wrong. Do you want to try it again? [y/n] ");  //Stellt dem User eine Wiederholungsfrage
+            ch = getchar(); //getchar -> Besprechung im Praktikum
+        }
+        
+    }
+
+    while (ch == 'y'); // Während 'y' (für yes)
+
+    system ("cls"); // Befehl, um das Fenster zu säubern
+    printf("Thank you for trying !");
+    printf("\n");
+
+
+    // Befehl, bei erfolgreicher Ausführung des Programmes - Resetted das Programm
+    return 0;
+}
+
+
+//Aufforderung des Users mit einer Frage
+int ask_question(void) //Definition der Funktion "ask_question"
+{
+    // Variable, für den User-Imput deklarieren
+    int i;
+
+    //Stellt dem User die Hauptfrage
+    printf("What is the answer to everything?\n");
+
+ 
+    scanf_s ("%i", &i); //Ließt Input einer Konsolleneingabe & weist einen Variablentypen zu
+
+    if (i == 42) //Bedingungsschleife ! Userinput => Schleife antwortet mit printf
+    {
+        printf("That is correct!"); // Reaktion, auf die richtige Antwort
+    }
+    else
+    {
+        printf("No\n"); //Reaktion, auf eine falsche Angabe
+    }
+
+
+    while ((getchar()) != '\n') //Eingabepuffer löschen //FRAGESTELLUNG: Was passiert mit getchar ? Wie definiere ich es am besten?
+    {
+    return i; // User wird zum freien Eingabefeld geleitet
+    }    
+
+}
