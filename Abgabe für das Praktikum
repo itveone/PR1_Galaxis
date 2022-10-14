@@ -4,50 +4,55 @@
 // Datum: 07.10.2022
 // Version: 1 (Erstabgabe)
 
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h> //Library beinhaltet die Funktion "system"
 #include <stdlib.h> //Standardbibliothek
 
-int ask_question(void); //Auflistung von Funktionen/Methods
+//int ask_question(void); //Auflistung von Funktionen/Methods
 
 
 int main(void) // Hauptprogramm
 {
-
-    int ch;     ///Deklaration der Variable -> Für unser "Try again" Input
+    
+    int  answer; //Zeigt dem User die Hauptfrage
+    int ch='y';  ///Deklaration der Variable -> Für unser "Try again" Input
                 //Für die do-while Schleife
 
-// Main execution of prompting user and repeat
-// Do-while so that the conditional is checked
-// AFTER first asking the question
 
-
-    do
+    while (ch == 'y')     // Während 'y' (für yes)
     {
         system("cls"); //Befehl, um das Fenster zu säubern
+
         printf("Hello, User !"); //Willkommensgruß
+        printf("What is the answer to everything?\n");  //Stellt dem User die Hauptfrage
+        answer = 0; // "answer = 0" damit bei dem Loop die "42" nicht gespeichert wird -> Sonst gibt der PC ein yes. obwohl wir einen Buchstaben eig eingeben
+        scanf("%d", &answer); //Liest den User Input
         printf("\n");
 
-        //Zeigt dem User die Hauptfrage
-        int  answer = ask_question();
-
+     
         if (answer == 42)
         {
-            return 0;
+            printf("That is correct!"); // Reaktion, auf die richtige Antwort
+            
         }
 
         else
         {
-            printf("Unfortunately, your answer is wrong. Do you want to try it again? [y/n] ");  //Stellt dem User eine Wiederholungsfrage
+            printf("Unfortunately, your answer is wrong.");  //Stellt dem User eine Wiederholungsfrage
             ch = getchar(); //getchar -> Besprechung im Praktikum
+          
         }
+
+        while (getchar() != '\n') {} //Eingabepuffer wird gelöst
+        printf("Do you want to try it again ? [y / n]"); //Wiederholunsgfrage
+        scanf("%c", &ch);
+
+        while (getchar() != '\n') {} //Eingabepuffer wird gelöst
         
     }
 
-    while (ch == 'y'); // Während 'y' (für yes)
-
-    system ("cls"); // Befehl, um das Fenster zu säubern
-    printf("Thank you for trying !");
+    system("cls"); // Befehl, um das Fenster zu säubern
+    printf("Thank you for trying !"); //Auf Wuedersehen :)
     printf("\n");
 
 
@@ -56,7 +61,7 @@ int main(void) // Hauptprogramm
 }
 
 
-//Aufforderung des Users mit einer Frage
+/*Aufforderung des Users mit einer Frage
 int ask_question(void) //Definition der Funktion "ask_question"
 {
     // Variable, für den User-Imput deklarieren
@@ -65,8 +70,9 @@ int ask_question(void) //Definition der Funktion "ask_question"
     //Stellt dem User die Hauptfrage
     printf("What is the answer to everything?\n");
 
- 
-    scanf_s ("%i", &i); //Ließt Input einer Konsolleneingabe & weist einen Variablentypen zu
+
+    scanf("%i", &i); //Ließt Input einer Konsolleneingabe & weist einen Variablentypen zu
+    while (getchar() != '\n') {} //Eingabepuffer löschen //FRAGESTELLUNG: Was passiert mit getchar ? Wie definiere ich es am besten?
 
     if (i == 42) //Bedingungsschleife ! Userinput => Schleife antwortet mit printf
     {
@@ -78,9 +84,8 @@ int ask_question(void) //Definition der Funktion "ask_question"
     }
 
 
-    while ((getchar()) != '\n') //Eingabepuffer löschen //FRAGESTELLUNG: Was passiert mit getchar ? Wie definiere ich es am besten?
-    {
+   
     return i; // User wird zum freien Eingabefeld geleitet
-    }    
-
+    
 }
+*/
