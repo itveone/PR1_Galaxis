@@ -15,18 +15,19 @@ int main(void) // Hauptprogramm
 {
     
     int  answer; //Zeigt dem User die Hauptfrage
-    int ch='y';  ///Deklaration der Variable -> Für unser "Try again" Input
+    char ch='y';  ///Deklaration der Variable -> Für unser "Try again" Input
                 //Für die do-while Schleife
+    int rueckgabe;
 
 
-    while (ch == 'y')     // Während 'y' (für yes)
+    while (ch != 'x')     // Während 'y' (für yes)
     {
         system("cls"); //Befehl, um das Fenster zu säubern
 
         printf("Hello, User !"); //Willkommensgruß
         printf("What is the answer to everything?\n");  //Stellt dem User die Hauptfrage
         answer = 0; // "answer = 0" damit bei dem Loop die "42" nicht gespeichert wird -> Sonst gibt der PC ein yes. obwohl wir einen Buchstaben eig eingeben
-        scanf("%d", &answer); //Liest den User Input
+        rueckgabe = scanf("%d", &answer); //Liest den User Input
         printf("\n");
 
      
@@ -38,14 +39,16 @@ int main(void) // Hauptprogramm
 
         else
         {
-            printf("Unfortunately, your answer is wrong.");  //Stellt dem User eine Wiederholungsfrage
-            ch = getchar(); //getchar -> Besprechung im Praktikum
+            printf("Unfortunately, your answer is wrong.\n");  //Stellt dem User eine Wiederholungsfrage
+            //ch = getchar(); //getchar -> Besprechung im Praktikum
           
         }
 
         while (getchar() != '\n') {} //Eingabepuffer wird gelöst
-        printf("Do you want to try it again ? [y / n]"); //Wiederholunsgfrage
-        scanf("%c", &ch);
+        printf("Do you want to try it again ? [y /x]"); //Wiederholunsgfrage
+        //rueckgabe=scanf("%c", &ch);
+        ch = getchar(); //getchar -> Besprechung im Praktikum
+
 
         while (getchar() != '\n') {} //Eingabepuffer wird gelöst
         
@@ -88,4 +91,4 @@ int ask_question(void) //Definition der Funktion "ask_question"
     return i; // User wird zum freien Eingabefeld geleitet
     
 }
-*/
+*//
