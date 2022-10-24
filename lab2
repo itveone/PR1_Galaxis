@@ -1,0 +1,121 @@
+//Labor 2: Primfaktorzerlegung
+// Author: Mariam Ahmadi
+// Datum: 24.10.2022
+
+
+
+#define _CRT_SECURE_NO_WARNINGS 
+#include<stdio.h>
+
+int is_even(int num);
+int is_prime(int num);
+void print_primes(int num);
+void primefactors(int num);
+
+int main(void)
+{
+	int num;
+
+	printf("Enter a number: ");
+	scanf("%d", &num);
+
+	if (is_even(num))
+	{
+		printf("The number is even ");
+	}
+	else
+	{
+		printf("The number is odd ");
+	}
+
+	if (is_prime(num))
+	{
+		printf("and is a prime.");
+	}
+	else
+	{
+		printf("and is not a prime.");
+	}
+
+	printf("\n");
+
+	if (num <= 1000)
+	{
+		printf("List of primes:\n");
+		print_primes(num);
+	}
+ 
+	printf("\n");
+	printf("List of primefactors:\n");
+	primefactors(num);
+	printf("\n");
+	return 0;
+}
+
+int is_even(int num)
+{
+	if (num % 2 == 0)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+
+	return 0;
+}
+
+int is_prime(int num)
+{
+	if (is_even(num))
+	{
+		return 0;
+	}
+
+	for (int i = 3; i < num; i += 2) // austesten jeder ungeraden zahl ob diese die eingegebene zahl teilen kann
+	{
+		if (num % i == 0)
+		{
+			return 0;
+		}
+	}
+	 
+	return 1; 
+}
+
+void print_primes(int num) // liste für die primenzahlen bis zur eingegebenen zahl
+{
+
+	for (int i = 3; i < num; i += 2) // schleife: jede zahl bis zur eingegebenen zahl wird getestet ob primezahl. wenn primzahl dann ausgeben
+	{
+		if (is_prime(i))
+		{
+			printf("%3d ", i);
+		}
+
+	}
+
+	return;
+}
+
+void primefactors(int num) // Die Liste mit den Primzahlen wird berechnet/ausgelistet, die bis zur int Zahl geht
+{
+	while (num % 2 == 0) 
+	{
+		num = num / 2;
+		printf("2 ");
+	}
+
+	for (int i = 3; i < num; i += 2) // Der  Computer fängt ab der Zahl 3 an und addiert +2 => Der PC gibt uns die Primzahlen. Man kann auch ab "2" anfangen, und "i++
+" angeben,  damit wir ab der ersten Primzahl anfangen und alle Zahlen durchgehen, 	{
+		while (num % i == 0)
+		{
+			num = num /i;
+			printf("%d ", i);
+		}
+
+	}
+
+	return;
+}
