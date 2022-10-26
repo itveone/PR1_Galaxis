@@ -1,0 +1,152 @@
+// Praktikumabgabe 2
+// Primfaktorzerlegung
+// Author: Ahmadi, Mariam (S1, REE)
+// Datum: 24.10.2022
+// Version: 1 (Erstabgabe)
+
+
+
+//Formalitäten: Includes & define (scanf)
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h> //Standardbibliothek (printf)
+#include <stdlib.h> //Bib
+#include <math.h> //Rechen Bib ->Nochmal anschauen
+
+//Mitteilung/Auflistung (Funktionen)
+int is_even(int);
+int is_prime(int);
+void print_prime_factors(int); //"Void", da die Funktion nur ausgibt
+
+
+
+
+//Ausführung (Frontend)
+	int main(void)
+		{
+
+		//AUFGABE 2.2: Gerade oder ungerade Zahl
+	
+			//Deklaration der "unsigned int"
+			unsigned int n;
+			printf("Tippe eine Zahl ein:");
+			scanf("%u", &n); //%u -> Platzhalter für unsighend int (für die Zahl), &n -> Adresse für n 
+
+			int n_is_even = is_even(n);
+
+			if (n_is_even) // if-Bedingung prüft ob die Zahl größer als "0" ist bzw. eine Bedinung erfüllt
+			{
+				printf("%u ist gerade.\n", n);
+			}
+
+			else
+			{
+				printf("%u ist ungerade.\n", n);
+			}
+
+
+			//AUFGBE 2.3: Primzahl oder keine Primzahl
+
+			int n_is_prime = is_prime(n);
+
+			if (n_is_prime) // if-Bedingung prüft ob (die Zahl größer als "0" ist bzw.) eine Bedinung erfüllt wird
+			{
+				printf("%u ist eine Primzahl.\n", n); //Terminalausgabe bei gerader Zahl
+			}
+
+			else
+			{
+				printf("%u ist keine Primzahl.\n", n); //Terminalausgabe bei ungerader Zahl
+			}
+
+			//Nacharbeit: warum jetzt die for-loop? ->Liste von Primzahlen -> 2.5 
+			for (int i = 0; i < n; i++) //for immer mit 0 bestimmen, nochmal anschauen
+			{
+				if (is_prime(i))
+				{
+					printf("%i ist eine Primzahl\n", i);
+				}
+			}
+
+
+			print_prime_factors(n); // Nochmal anschauen !
+
+			return 0;
+
+
+		}
+
+
+//Definition der Funktion (Backend)
+	 
+		//Aufgabe 2.2 Funktion: Gerade/Ungerade Zahl, Rechnung mit Modulo
+
+		int is_even(int n)
+			{
+				int even = ((n % 2) == 0); //n = Wert -> Testung (Gerade Zahl)
+				return even; //Return Value gibt unseren Wert aus
+				
+			}
+
+
+
+
+		//Aufgabe 2.3 Funktion: Primzahl/Keine Primzahl
+
+		int is_prime(int n) //Funktion: Rechnung mit Modulo, Zahl ungerade oder gerade
+		{
+			int smallest_prime = 2;
+			if (n == 0) return 0; // -> Konditionen erneut anschauen
+			if (n == 1) return 0; //	Auffälligkeiten bei Ausgabe von ungerade/gerade Terminalausgabe
+			if (n == 2) return 1; //
+
+			if (is_even(n)) return 0;
+
+			for (int i = smallest_prime + 1; i < n; i += 2) // i+=2 ist das selbe wie i = i+2
+			{
+				if ((n % i) == 0) //Rechnung mit Modulo -> Keinen Restbetrag
+				{
+					return 0;
+				}
+			}
+
+			return 1;
+		}
+
+		//2.4 Aufgabe: Liste von Primzahlen -> 2.5 
+		//Verschachtelung
+
+		void print_prime_factors(int n)
+		{
+			int smallest_prime = 2;
+			int factor = smallest_prime; //Als erste Primzahl wird 2 ausgegeben
+
+			if(n == 0) return; // Die Zahl 0 wird als "n" blockiert
+
+			do {
+
+				int is_divisible = (n % factor) == 0; //Die Zahl ist teilbar, wenn der Rest von Modulo gleich 0 ist
+
+				if (is_divisible)
+				{
+
+					n = n / factor;
+					printf("%i", factor);
+			
+				}
+				else
+				{
+					//Increment to next prime 2 -> 3, 7-> 11 etc.
+					do
+					{
+						factor++; //Faktor soll solange erhöht werden, bis eine neue Primzahl gegeben wird
+
+					} while (!is_prime(factor)); //Es soll hochgezählt werden, solange eine Zahl NICHT eine Primzahl ist
+				}
+
+			} while (n > 1);
+
+				printf("\n");
+
+			return;
+		}
+
